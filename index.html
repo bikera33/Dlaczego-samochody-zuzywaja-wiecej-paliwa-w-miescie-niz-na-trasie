@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dlaczego samochody zużywają więcej paliwa w mieście niż na trasie?</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#dbeafe,#f0f9ff);
+    color:#333;
+    overflow-x:hidden;
+}
+
+/* Pływające naklejki */
+.sticker{
+    position:fixed;
+    font-size:60px;
+    opacity:0.1;
+    z-index:-1;
+    animation:float 8s ease-in-out infinite;
+}
+
+.s1{top:10%;left:5%;}
+.s2{top:30%;right:5%;animation-delay:2s;}
+.s3{bottom:20%;left:8%;animation-delay:4s;}
+.s4{bottom:10%;right:10%;animation-delay:6s;}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-25px);}
+}
+
+/* Animowany samochód */
+.car{
+    position:fixed;
+    bottom:15px;
+    left:-120px;
+    font-size:55px;
+    animation:drive 18s linear infinite;
+    z-index:100;
+}
+
+@keyframes drive{
+    from{left:-120px;}
+    to{left:110%;}
+}
+
+/* Nagłówek */
+header{
+    min-height:100vh;
+    background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70");
+    background-size:cover;
+    background-position:center;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+header h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+header p{
+    font-size:1.3rem;
+    max-width:800px;
+}
+
+main{
+    max-width:1100px;
+    margin:auto;
+    padding:30px;
+}
+
+section{
+    background:white;
+    margin:25px 0;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h2{
+    color:#1565c0;
+    margin-bottom:15px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#e3f2fd;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th{
+    background:#1565c0;
+    color:white;
+}
+
+th,td{
+    padding:12px;
+    border:1px solid #ccc;
+    text-align:center;
+}
+
+.quiz{
+    background:#f8fafc;
+    border-left:5px solid #1565c0;
+    padding:15px;
+    margin:15px 0;
+}
+
+footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+}
+
+ul li{
+    margin-bottom:10px;
+}
+
+.highlight{
+    background:#fff8c5;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+.quiz-btn{
+    margin-top:20px;
+    padding:15px 30px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#1565c0,#42a5f5);
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.quiz-btn:hover{
+    transform:translateY(-3px) scale(1.05);
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.quiz-btn:active{
+    transform:scale(.98);
+}
+
+#nagroda{
+    text-align:center;
+    font-size:32px;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+.mistrz{
+    animation:bounce 1s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+/* Turbo samochód */
+
+.turbo{
+    animation:turboDrive 4s linear infinite !important;
+}
+
+@keyframes turboDrive{
+    from{
+        left:-150px;
+    }
+
+    to{
+        left:120%;
+    }
+}
+
+ol, ul{
+    padding-left: 10px;
+    margin-left: 10px;
+}
+
+ol li, ul li{
+    margin-bottom: 10px;
+    padding-left: 5px;
+}
+
+/* TELEFONY */
+
+@media (max-width: 768px){
+
+    header h1{
+        font-size: 2rem;
+    }
+
+    header p{
+        font-size: 1rem;
+    }
+
+    main{
+        padding: 15px;
+    }
+
+    section{
+        padding: 18px;
+    }
+
+    .cards{
+        grid-template-columns: 1fr;
+    }
+
+    table{
+        font-size: 14px;
+    }
+
+    th, td{
+        padding: 8px;
+    }
+
+    .quiz-btn{
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .car{
+        font-size: 40px;
+    }
+
+    .sticker{
+        font-size: 40px;
+    }
+
+    #nagroda{
+        font-size: 24px;
+    }
+
+    ol, ul{
+        padding-left: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Naklejki -->
+<div class="sticker s1">⛽</div>
+<div class="sticker s2">🚦</div>
+<div class="sticker s3">⚙️</div>
+<div class="sticker s4">🚗</div>
+
+<!-- Samochód -->
+<div class="car">🚗</div>
+
+<header>
+    <h1>🚗 Dlaczego samochody zużywają więcej paliwa w mieście niż na trasie?</h1>
+    <p>Projekt z fizyki – Energia, Praca i Moc</p>
+</header>
+
+<main>
+
+<section>
+    <h2>📖 Wprowadzenie</h2>
+
+    <p>
+        Wielu kierowców zauważa, że samochód spala więcej paliwa podczas jazdy po mieście
+        niż podczas podróży drogą ekspresową lub autostradą. Wynika to bezpośrednio
+        z praw fizyki związanych z energią, pracą i mocą. W mieście samochód często
+        zatrzymuje się na światłach, rusza, przyspiesza i hamuje. Każda z tych czynności
+        wymaga dodatkowej energii pochodzącej ze spalania paliwa.
+    </p>
+
+    <div class="highlight">
+        💡 Ciekawostka: Ten sam samochód może spalać nawet dwa razy więcej paliwa
+        w mieście niż podczas spokojnej jazdy w trasie.
+    </div>
+</section>
+
+<section>
+    <h2>⚡ Praca i moc w fizyce</h2>
+
+    <p>
+        Praca w fizyce jest wykonywana wtedy, gdy siła powoduje przemieszczenie ciała.
+        W samochodzie pracę wykonuje silnik, który wprawia pojazd w ruch.
+    </p>
+
+    <br>
+
+    <p>
+        Moc określa szybkość wykonywania pracy. Im większa moc silnika,
+        tym szybciej samochód może przyspieszać.
+    </p>
+
+    <br>
+
+    <p>
+        Energia chemiczna zawarta w paliwie zamieniana jest na energię mechaniczną,
+        która umożliwia poruszanie się pojazdu.
+    </p>
+</section>
+
+<section>
+    <h2>🚦 Dlaczego w mieście spalanie jest większe?</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🚀 Przyspieszanie</h3>
+            <p>
+                Każde rozpędzenie samochodu wymaga dużej ilości energii,
+                a więc również większej ilości paliwa.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🛑 Hamowanie</h3>
+            <p>
+                Energia kinetyczna zamienia się głównie w ciepło,
+                które jest tracone.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🚗 Ruszanie</h3>
+            <p>
+                Na światłach i skrzyżowaniach samochód wielokrotnie
+                rozpędza się od zera.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <h2>🌬️ Wpływ oporów ruchu</h2>
+
+    <ul>
+        <li><strong>Opór toczenia</strong> – powstaje między oponami a nawierzchnią.</li>
+        <li><strong>Opór powietrza</strong> – rośnie wraz z prędkością.</li>
+        <li><strong>Tarcie mechaniczne</strong> – występuje w silniku i układzie napędowym.</li>
+    </ul>
+
+    <p>
+        Podczas jazdy ze stałą prędkością silnik musi głównie pokonywać opory ruchu.
+        W mieście dodatkowo ciągle rozpędza pojazd, co zwiększa spalanie.
+    </p>
+</section>
+
+<section>
+    <h2>📊 Miasto kontra trasa</h2>
+    <div style="overflow-x:auto;">
+    <table>
+        <tr>
+            <th>Warunki jazdy</th>
+            <th>Średnie spalanie</th>
+        </tr>
+
+        <tr>
+            <td>🛣️ Trasa</td>
+            <td>5 l/100 km</td>
+        </tr>
+
+        <tr>
+            <td>🌆 Miasto</td>
+            <td>8–10 l/100 km</td>
+        </tr>
+    </table>
+    </div>
+
+    <p style="margin-top:15px;">
+        Wartości są przykładowe, ale dobrze pokazują różnicę pomiędzy jazdą miejską
+        a jazdą ze stałą prędkością.
+    </p>
+</section>
+
+<section>
+    <h2>🚚 Przykłady z życia kierowców i logistyki</h2>
+
+    <ul>
+        <li>Kurierzy korzystają z nawigacji, aby omijać korki.</li>
+        <li>Firmy logistyczne planują trasy minimalizujące postoje.</li>
+        <li>Kierowcy ciężarówek starają się utrzymywać stałą prędkość.</li>
+        <li>Autobusy miejskie spalają dużo paliwa przez częste zatrzymywanie się.</li>
+        <li>Płynna jazda pozwala zaoszczędzić paliwo i zmniejszyć emisję spalin.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>🤯 Ciekawostki</h2>
+
+    <ul>
+        <li>🔋 Samochody hybrydowe odzyskują część energii podczas hamowania.</li>
+        <li>⛽ System Start-Stop wyłącza silnik na światłach.</li>
+        <li>🚗 Płynna jazda może obniżyć spalanie nawet o kilkanaście procent.</li>
+        <li>🛞 Nieprawidłowe ciśnienie w oponach zwiększa zużycie paliwa.</li>
+        <li>❄️ Klimatyzacja również wpływa na spalanie.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>🎮 Interaktywny Quiz</h2>
+
+    <form id="quiz">
+
+        <div class="quiz">
+            <h3>1. Dlaczego samochód spala więcej paliwa w mieście?</h3>
+
+            <label><input type="radio" name="q1" value="0"> Bo paliwo jest gorsze</label><br>
+            <label><input type="radio" name="q1" value="1"> Bo częściej przyspiesza i hamuje</label><br>
+            <label><input type="radio" name="q1" value="0"> Bo silnik jest większy</label>
+        </div>
+
+        <div class="quiz">
+            <h3>2. Czym jest praca w fizyce?</h3>
+
+            <label><input type="radio" name="q2" value="1"> Działaniem siły powodującym przemieszczenie</label><br>
+            <label><input type="radio" name="q2" value="0"> Rodzajem energii</label><br>
+            <label><input type="radio" name="q2" value="0"> Jednostką mocy</label>
+        </div>
+
+        <div class="quiz">
+            <h3>3. Jaką jednostkę ma moc?</h3>
+
+            <label><input type="radio" name="q3" value="0"> Dżul</label><br>
+            <label><input type="radio" name="q3" value="1"> Wat</label><br>
+            <label><input type="radio" name="q3" value="0"> Newton</label>
+        </div>
+
+        <div class="quiz">
+            <h3>4. Co dzieje się z energią podczas hamowania?</h3>
+
+            <label><input type="radio" name="q4" value="1"> Zamienia się głównie w ciepło</label><br>
+            <label><input type="radio" name="q4" value="0"> Zamienia się w paliwo</label><br>
+            <label><input type="radio" name="q4" value="0"> Znika</label>
+        </div>
+
+        <div class="quiz">
+            <h3>5. Który sposób jazdy jest najbardziej ekonomiczny?</h3>
+
+            <label><input type="radio" name="q5" value="0"> Ciągłe przyspieszanie</label><br>
+            <label><input type="radio" name="q5" value="1"> Jazda ze stałą prędkością</label><br>
+            <label><input type="radio" name="q5" value="0"> Częste hamowanie</label>
+        </div>
+
+        <button class="quiz-btn" type="button" onclick="sprawdzQuiz()">
+    🚗 Sprawdź wynik
+</button>
+
+    </form>
+
+    <h3 id="wynik"></h3>
+</section>
+<div id="nagroda"></div>
+<section>
+    <h2>📝 Podsumowanie</h2>
+
+    <p>
+        Samochody zużywają więcej paliwa w mieście, ponieważ często przyspieszają
+        i hamują. Silnik musi wtedy wykonywać większą pracę, a energia uzyskana
+        ze spalania paliwa jest częściowo tracona podczas hamowania.
+        Podczas jazdy w trasie samochód utrzymuje bardziej stałą prędkość,
+        dzięki czemu spalanie jest mniejsze.
+    </p>
+</section>
+
+<section>
+<h2>📚 Źródła</h2>
+
+<ol>
+<li>
+<a href="https://pl.wikipedia.org/wiki/Praca_(fizyka)" target="_blank">
+Praca (fizyka) – Wikipedia
+</a>
+</li>
+
+<li>
+<a href="https://pl.wikipedia.org/wiki/Moc" target="_blank">
+Moc – Wikipedia
+</a>
+</li>
+
+<li>
+<a href="https://www.gov.pl/web/edukacja" target="_blank">
+Materiały edukacyjne Ministerstwa Edukacji
+</a>
+</li>
+
+<li>
+<a href="https://www.auto-swiat.pl" target="_blank">
+Auto Świat – artykuły motoryzacyjne
+</a>
+</li>
+
+<li>
+<a href="https://www.pw.edu.pl" target="_blank">
+Politechnika Warszawska
+</a>
+</li>
+</ol>
+</section>
+
+</main>
+
+<footer>
+    🚗 Projekt z fizyki – Energia, Praca i Moc 🚗
+</footer>
+
+<script>
+
+function sprawdzQuiz(){
+
+    let punkty = 0;
+
+    const odpowiedzi =
+        document.querySelectorAll(
+            'input[type="radio"]:checked'
+        );
+
+    odpowiedzi.forEach(odp=>{
+        punkty += Number(odp.value);
+    });
+
+    const wynik =
+        document.getElementById("wynik");
+
+    const nagroda =
+        document.getElementById("nagroda");
+
+    const auto =
+        document.querySelector(".car");
+
+    auto.classList.remove("turbo");
+
+    if(punkty === 5){
+
+        wynik.innerHTML =
+        "🏆 5/5! Perfekcyjny wynik!";
+
+        nagroda.innerHTML =
+        '<div class="mistrz">🚗💨 MISTRZ OSZCZĘDNEJ JAZDY! 💨🚗</div>';
+
+        auto.classList.add("turbo");
+
+        document.body.style.background =
+        "linear-gradient(135deg,#fff7ad,#ffd54f)";
+    }
+
+    else if(punkty >= 3){
+
+        wynik.innerHTML =
+        "👏 " + punkty + "/5! Bardzo dobry wynik!";
+
+        nagroda.innerHTML =
+        "🚦 Jeszcze trochę i będziesz mistrzem!";
+    }
+
+    else{
+
+        wynik.innerHTML =
+        "📚 " + punkty + "/5. Warto jeszcze przeczytać projekt.";
+
+        nagroda.innerHTML =
+        "⛽ Spróbuj jeszcze raz!";
+    }
+}
+
+</script>
+</body>
+</html>
